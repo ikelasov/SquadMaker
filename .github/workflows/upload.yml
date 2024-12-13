@@ -1,0 +1,23 @@
+name: upload
+
+on:
+  workflow_dispatch:
+jobs:
+  upload:
+    name: Upload
+    runs-on: ubuntu-latest-cpu8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.5.3
+
+      - name: Create buildnum
+        run: |
+          echo "1" > config/buildnum
+
+      - name: Upload build number
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-number
+          path: config/buildnum
+          retention-days: 1
+  
